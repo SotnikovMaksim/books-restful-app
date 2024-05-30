@@ -1,0 +1,27 @@
+version: '3.8'
+services:
+  books-postgres:
+    image: postgres:14.1-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=#{POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    ports:
+      - ${POSTGRES_PORT}:${POSTGRES_PORT}
+    volumes:
+      - ./init-db-scripts/postgres:/docker-entrypoint-initdb.d
+      - books-postgres-vol:/var/lib/postgresql/data
+    container_name: books-postgres
+
+  books-app:
+    build:
+      context: .
+    ports:
+      - ${BOOKS_APP_BACKEND}:${BOOKS_APP_BACKEND}
+    depends_on:
+      - books-postgres
+    container_name: books-app
+
+volumes:
+  books-postgres-vol:
+    driver: local
