@@ -38,6 +38,7 @@ dependencies {
     implementation libs.liquibase.core
     implementation libs.spring.boot.starter
     implementation libs.spring.boot.data.jpa
+    implementation libs.postgresql.driver
 }
 
 bootJar {

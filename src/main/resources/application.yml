@@ -3,10 +3,10 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}
-    username: ${DB_USERNAME}
-    password: ${DB_USERNAME}
-    name: ${DB_NAME}
+    url: jdbc:postgresql://${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB_NAME}
+    username: ${POSTGRES_USERNAME}
+    password: ${POSTGRES_PASSWORD}
+    name: ${POSTGRES_DB_NAME}
   jpa:
     generate-ddl: false
     show-sql: true
@@ -14,4 +14,9 @@ spring:
       hibernate:
         format_sql: true
   liquibase:
-    change-log: classpath:/db.changelog/changelog-master.yaml
+    change-log: classpath:/db/changelog/changelog-master.yaml
+    url: jdbc:postgresql://${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB_NAME}
+    user: ${POSTGRES_USERNAME}
+    password: ${POSTGRES_PASSWORD}
+    default-schema: books
+    liquibase-schema: liquibase
